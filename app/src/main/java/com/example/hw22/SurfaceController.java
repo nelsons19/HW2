@@ -11,6 +11,15 @@ import com.example.*;
 
 import java.security.PublicKey;
 
+/**
+ * <!-- class CustomElement -->
+ *
+ * This class defines the Controller for the surface view.
+ *
+ * @author Spencer Nelson
+ * @version Spring 2019
+ *
+ */
 public class SurfaceController extends SurfaceView implements View.OnTouchListener{
 
     public CustomCircle head = new CustomCircle("head",0xFFFFE0BD,600,600,600);

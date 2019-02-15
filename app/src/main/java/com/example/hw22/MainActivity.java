@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener{
+public class MainActivity extends AppCompatActivity {
     SeekBar redValueSB = null;
     SeekBar greenValueSB = null;
     SeekBar blueValueSB = null;
@@ -28,46 +28,26 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.surface_layout);
+
         //initialize and set listener for seek bars
         redValueSB = (findViewById(R.id.redValueSB));
-        redValueSB.setOnSeekBarChangeListener(this);
 
         greenValueSB = (findViewById(R.id.greenValueSB));
-        greenValueSB.setOnSeekBarChangeListener(this);
+        //greenValueSB.setOnSeekBarChangeListener(this);
 
         blueValueSB = (findViewById(R.id.blueValueSB));
-        blueValueSB.setOnSeekBarChangeListener(this);
+        //blueValueSB.setOnSeekBarChangeListener(this);
 
         redValue = (findViewById(R.id.redValue));
         greenValue = (findViewById(R.id.greenValue));
         blueValue = (findViewById(R.id.blueValue));
 
+        SeekbarController cont = new SeekbarController(redValueSB, greenValueSB, blueValueSB,
+                                        redValue, greenValue, blueValue);
+
         mySurfaceview = (findViewById(R.id.mySurfaceview));
-        SurfaceController painter = new SurfaceController(this);
-        mySurfaceview.setOnTouchListener(painter);
+        SurfaceController surface = new SurfaceController(this);
+        mySurfaceview.setOnTouchListener(surface);
 
-            }
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        if(seekBar == redValueSB) {
-            redValue.setText("" + progress);
-        }
-        else if (seekBar == greenValueSB){
-            greenValue.setText("" + progress);
-        }
-        else{
-            blueValue.setText("" + progress);
-        }
-
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        //IGNORE
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        //IGNORE
     }
 }
