@@ -6,22 +6,29 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class Listener implements View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
+/**
+ * This class defines the listener for the custom surface view as well as the
+ * seek bars. It handles all on touch and progress changed events.
+ *
+ * @author Spencer Nelson
+ * @version Spring 2019
+ *
+ */
+public class Listener implements View.OnTouchListener,
+                        SeekBar.OnSeekBarChangeListener {
 
     private SurfaceController SurfaceController;
+
+    private CustomElement selectedElement;
 
     private SeekBar redBar;
     private SeekBar greenBar;
     private SeekBar blueBar;
 
-    private CustomElement currentElement = null;
-
     private TextView drawingName;
     private TextView redTV;
     private TextView greenTV;
     private TextView blueTV;
-
-    private SurfaceController theSurfaceController;
 
     private int red;
     private int green;
@@ -51,8 +58,6 @@ public class Listener implements View.OnTouchListener, SeekBar.OnSeekBarChangeLi
         blueTV = passedBlueTV;
         blueBar.setOnSeekBarChangeListener(this);
 
-       theSurfaceController = passedInSurfaceController;
-       theSurfaceController.setOnTouchListener(this);
     }
 
     @Override
@@ -62,28 +67,28 @@ public class Listener implements View.OnTouchListener, SeekBar.OnSeekBarChangeLi
         int yTap = (int)event.getY();
 
         if( SurfaceController.lPupil.containsPoint(xTap, yTap)){
-            currentElement = SurfaceController.lPupil;
+            selectedElement = SurfaceController.lPupil;
             setSeekBars(SurfaceController.lPupil);
 
         }
         else if (SurfaceController.lEye.containsPoint(xTap, yTap)){
-            currentElement = SurfaceController.lEye;
+            selectedElement = SurfaceController.lEye;
             setSeekBars(SurfaceController.lEye);
         }
         else if (SurfaceController.rPupil.containsPoint(xTap, yTap)){
-            currentElement = SurfaceController.rPupil;
+            selectedElement = SurfaceController.rPupil;
             setSeekBars(SurfaceController.rPupil);
         }
         else if (SurfaceController.rEye.containsPoint(xTap, yTap)){
-            currentElement = SurfaceController.rEye;
+            selectedElement = SurfaceController.rEye;
             setSeekBars(SurfaceController.rEye);
         }
         else if (SurfaceController.mouth.containsPoint(xTap, yTap)){
-            currentElement = SurfaceController.mouth;
+            selectedElement = SurfaceController.mouth;
             setSeekBars(SurfaceController.mouth);
         }
         else if (SurfaceController.head.containsPoint(xTap, yTap)){
-            currentElement = SurfaceController.head;
+            selectedElement = SurfaceController.head;
             setSeekBars(SurfaceController.head);
         }
 
@@ -109,13 +114,14 @@ public class Listener implements View.OnTouchListener, SeekBar.OnSeekBarChangeLi
         redBar.setProgress(red);
         greenBar.setProgress(green);
         blueBar.setProgress(blue);
-        drawingName.setText(currentElement.myName);
+        drawingName.setText(selectedElement.myName);
 
     }
 
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    public void onProgressChanged(SeekBar seekBar, int progress,
+                                  boolean fromUser) {
 
         if(seekBar == redBar) {
             redTV.setText("" + progress );
@@ -131,7 +137,7 @@ public class Listener implements View.OnTouchListener, SeekBar.OnSeekBarChangeLi
         }
 
         int returnColor = Color.rgb(red, green, blue);
-        currentElement.setColor(returnColor);
+        selectedElement.setColor(returnColor);
 
         SurfaceController.invalidate();
     }

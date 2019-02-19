@@ -19,10 +19,10 @@ public class CustomRect extends CustomElement {
 
 
     /** the position and size of the rectangle is stored here */
-    protected Rect myRect;
+    private Rect myRect;
 
     /** the rectangles dimensions must be defined at construction */
-    public CustomRect(String name, int color,
+    private CustomRect(String name, int color,
                       int left, int top, int right, int bottom)
     {
         super(name, color);

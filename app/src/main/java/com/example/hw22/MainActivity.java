@@ -1,14 +1,7 @@
 package com.example.hw22;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -45,11 +38,15 @@ public class MainActivity extends AppCompatActivity {
         blueValue = (findViewById(R.id.blueValue));
         name = (findViewById(R.id.drawingName));
 
+        //Find and initialize the surface view I will be using
         surface = (findViewById(R.id.mySurfaceview));
 
+        //Create a listener object
         theListener = new Listener(surface, redValueSB, greenValueSB,
                                     blueValueSB, name, redValue, greenValue,
                                     blueValue);
+
+        //Set the surface view's listener to the custom Listener object
         surface.setOnTouchListener(theListener);
 
     }

@@ -40,13 +40,14 @@ public class CustomCircle extends CustomElement {
     }
 
 
-    /** for ease of calculation, just draw a box around the circle and see if the point is in that */
+    /** for ease of calculation, just draw a box around the circle and see if
+     * the point is in that */
     @Override
     public boolean containsPoint(int x, int y) {
         //Calculate the distance between this point and the center
         int xDist = Math.abs(x - this.x);
         int yDist = Math.abs(y - this.y);
-        int dist = (int)Math.sqrt(xDist*xDist + yDist*yDist);  //Thanks, Pythagoras :)
+        int dist = (int)Math.sqrt(xDist*xDist + yDist*yDist);
 
         return (dist < this.radius + TAP_MARGIN);
     }//contaisPoint
@@ -62,7 +63,9 @@ public class CustomCircle extends CustomElement {
     @Override
     public void drawHighlight(Canvas canvas) {
         canvas.drawCircle(x, y, radius, highlightPaint);
-        canvas.drawCircle(x, y, radius, outlinePaint);  //keep outline so it stands out
+
+        //keep outline so it stands out
+        canvas.drawCircle(x, y, radius, outlinePaint);
     }
 
 }//class CustomCircle
