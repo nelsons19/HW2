@@ -13,52 +13,44 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    public SeekBar redValueSB = null;
-    SeekBar greenValueSB = null;
-    SeekBar blueValueSB = null;
 
-    TextView redValue = null;
-    TextView greenValue = null;
-    TextView blueValue = null;
-    TextView name = null;
+    //Create instances of all objects that will be used
+    private SeekBar redValueSB = null;
+    private SeekBar greenValueSB = null;
+    private SeekBar blueValueSB = null;
 
-    SurfaceView mySurfaceview = null;
-    public SurfaceController surface;
-    SurfaceListner theSurfaceListener = null;
+    private TextView redValue = null;
+    private TextView greenValue = null;
+    private TextView blueValue = null;
+    private TextView name = null;
+
+    private SurfaceController surface;
+
+    private Listener theListener = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.surface_layout);
-        //View testView = new View(findViewById(R.id.sliders));
 
-        //initialize and set listener for seek bars
+        //Find and initialize all seek bars so values can be changed
         redValueSB = (findViewById(R.id.redValueSB));
-
         greenValueSB = (findViewById(R.id.greenValueSB));
-        //greenValueSB.setOnSeekBarChangeListener(this);
-
         blueValueSB = (findViewById(R.id.blueValueSB));
-        //blueValueSB.setOnSeekBarChangeListener(this);
 
+        //Find and initialize all seek bars so values can be changed
         redValue = (findViewById(R.id.redValue));
         greenValue = (findViewById(R.id.greenValue));
         blueValue = (findViewById(R.id.blueValue));
         name = (findViewById(R.id.drawingName));
 
-        mySurfaceview = (findViewById(R.id.mySurfaceview));
-        surface = new SurfaceController(this);
+        surface = (findViewById(R.id.mySurfaceview));
 
-        theSurfaceListener = new SurfaceListner(surface, redValueSB, greenValueSB, blueValueSB, name);
-
-        mySurfaceview.setOnTouchListener(theSurfaceListener);
-
-        SeekbarController cont = new SeekbarController(redValueSB, greenValueSB, blueValueSB,
-                redValue, greenValue, blueValue, surface, theSurfaceListener);
-
-
-
+        theListener = new Listener(surface, redValueSB, greenValueSB,
+                                    blueValueSB, name, redValue, greenValue,
+                                    blueValue);
+        surface.setOnTouchListener(theListener);
 
     }
 }
