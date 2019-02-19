@@ -13,21 +13,25 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    SeekBar redValueSB = null;
+    public SeekBar redValueSB = null;
     SeekBar greenValueSB = null;
     SeekBar blueValueSB = null;
 
     TextView redValue = null;
     TextView greenValue = null;
     TextView blueValue = null;
+    TextView name = null;
 
     SurfaceView mySurfaceview = null;
+    public SurfaceController surface;
+    SurfaceListner theSurfaceListener = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.surface_layout);
+        //View testView = new View(findViewById(R.id.sliders));
 
         //initialize and set listener for seek bars
         redValueSB = (findViewById(R.id.redValueSB));
@@ -41,13 +45,20 @@ public class MainActivity extends AppCompatActivity {
         redValue = (findViewById(R.id.redValue));
         greenValue = (findViewById(R.id.greenValue));
         blueValue = (findViewById(R.id.blueValue));
+        name = (findViewById(R.id.drawingName));
 
         SeekbarController cont = new SeekbarController(redValueSB, greenValueSB, blueValueSB,
                                         redValue, greenValue, blueValue);
 
         mySurfaceview = (findViewById(R.id.mySurfaceview));
-        SurfaceController surface = new SurfaceController(this);
-        mySurfaceview.setOnTouchListener(surface);
+        surface = new SurfaceController(this);
+        theSurfaceListener = new SurfaceListner(surface, name);
+        mySurfaceview.setOnTouchListener(theSurfaceListener);
+
+        //name.setText(surface.getName()); // think I will be changing this
+
+        //surface.invalidate();
+
 
     }
 }

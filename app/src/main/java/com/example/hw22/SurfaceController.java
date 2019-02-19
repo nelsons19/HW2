@@ -10,17 +10,16 @@ import android.view.View;
 import com.example.*;
 
 import java.security.PublicKey;
+import java.util.ArrayList;
 
 /**
- * <!-- class CustomElement -->
- *
  * This class defines the Controller for the surface view.
  *
  * @author Spencer Nelson
  * @version Spring 2019
  *
  */
-public class SurfaceController extends SurfaceView implements View.OnTouchListener{
+public class SurfaceController extends SurfaceView /*implements View.OnTouchListener*/{
 
     public CustomCircle head = new CustomCircle("head",0xFFFFE0BD,600,600,600);
     public CustomCircle lEye = new CustomCircle("left eye",0xFFFFFFFF,300,400,200);
@@ -29,8 +28,11 @@ public class SurfaceController extends SurfaceView implements View.OnTouchListen
     public CustomCircle rPupil = new CustomCircle( "right pupil", 0xFF6C3483,950,450,75);
     public CustomRect mouth = new CustomRect("mouth", 0xFF000000, 300, 800, 600, 900);
 
-    public int xVal;
-    public int yVal;
+    public int xTap;
+    public int yTap;
+
+    Context theContext;
+
 
     public SurfaceController(Context context) {
         super(context);
@@ -51,7 +53,8 @@ public class SurfaceController extends SurfaceView implements View.OnTouchListen
 
     private void init() {
         setWillNotDraw(false);
-        this.setOnTouchListener(this);
+        //TODO: this.setOnTouchListener(this);
+        this.setLayerType(this.LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
@@ -60,8 +63,6 @@ public class SurfaceController extends SurfaceView implements View.OnTouchListen
         //Set canvas background color
         canvas.drawColor(0xFFFFFFFF);
 
-
-
         head.drawMe(canvas);
         lEye.drawMe(canvas);
         rEye.drawMe(canvas);
@@ -69,24 +70,49 @@ public class SurfaceController extends SurfaceView implements View.OnTouchListen
         rPupil.drawMe(canvas);
         mouth.drawMe(canvas);
 
-
-
-
     }
 
-    @Override
+    /*@Override
     public boolean onTouch(View myView, MotionEvent event) {
-        xVal = (int)event.getX();
-        yVal = (int)event.getY();
+        xTap = (int)event.getX();
+        yTap = (int)event.getY();
+        int test = 0;
 
-        /*if (head.containsPoint(xVal, yVal)) {
-            head.setColor(0xFF456589);
+        if( lPupil.containsPoint(xTap, yTap)){
+            test = xTap;
+        }
+        else if (lEye.containsPoint(xTap, yTap)){
+            test = xTap;
+        }
+        else if (rPupil.containsPoint(xTap, yTap)){
+            test = xTap;
+        }
+        else if (rEye.containsPoint(xTap, yTap)){
+            test = xTap;
+        }
+        else if (mouth.containsPoint(xTap, yTap)){
+            test = xTap;
+        }
+        else if (head.containsPoint(xTap, yTap)){
+            test = xTap;
         }
 
-        head.setColor(0xFF456589);*/
+        if (head.containsPoint(xTap, yTap)) {
+            CustomCircle testCir = new CustomCircle("test", 0xFF000000, xTap, yTap, 100);
+
+        }
+
+        head.setColor(0xFF456589);
 
         this.invalidate();
 
         return true;
+    }*/
+    public String getName() {
+        String toReturn = "0";
+    if (head.containsPoint(xTap, yTap)){
+        toReturn = head.getName();
+    }
+    return toReturn;
     }
 }

@@ -4,8 +4,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 /**
- * <!-- class CustomElement -->
- *
  * This class defines the Controller for all seek bars.
  *
  * @author Spencer Nelson
@@ -13,12 +11,12 @@ import android.widget.TextView;
  *
  */
 public class SeekbarController implements SeekBar.OnSeekBarChangeListener {
-    SeekBar redBar;
-    SeekBar greenBar;
-    SeekBar blueBar;
-    TextView redTV;
-    TextView greenTV;
-    TextView blueTV;
+    private SeekBar redBar;
+    private SeekBar greenBar;
+    private SeekBar blueBar;
+    private TextView redTV;
+    private TextView greenTV;
+    private TextView blueTV;
 
     int rValue = 0;
 
