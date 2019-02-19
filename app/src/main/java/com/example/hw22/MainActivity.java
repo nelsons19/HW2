@@ -47,17 +47,17 @@ public class MainActivity extends AppCompatActivity {
         blueValue = (findViewById(R.id.blueValue));
         name = (findViewById(R.id.drawingName));
 
-        SeekbarController cont = new SeekbarController(redValueSB, greenValueSB, blueValueSB,
-                                        redValue, greenValue, blueValue);
-
         mySurfaceview = (findViewById(R.id.mySurfaceview));
         surface = new SurfaceController(this);
-        theSurfaceListener = new SurfaceListner(surface, name);
+
+        theSurfaceListener = new SurfaceListner(surface, redValueSB, greenValueSB, blueValueSB, name);
+
         mySurfaceview.setOnTouchListener(theSurfaceListener);
 
-        //name.setText(surface.getName()); // think I will be changing this
+        SeekbarController cont = new SeekbarController(redValueSB, greenValueSB, blueValueSB,
+                redValue, greenValue, blueValue, surface, theSurfaceListener);
 
-        //surface.invalidate();
+
 
 
     }
